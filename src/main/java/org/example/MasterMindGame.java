@@ -5,9 +5,13 @@ import org.example.MasterMind;
 import java.io.*;
 public class MasterMindGame {
     public static void main(String[] args) throws IOException {
-        MasterMind mGame = new MasterMind(); displayScreen();
+        MasterMind mGame = new MasterMind();
+        displayScreen();
         while (mGame.isProgress()){
             System.out.print("Enter Your Guess : ");
+            String ansStr = acceptNumber();
+
+            mGame.evaluateResult(new Answers(ansStr));
 
             System.out.print(mGame.getResult()+"\n");
         }

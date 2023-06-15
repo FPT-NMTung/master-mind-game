@@ -47,8 +47,7 @@ public class MasterMind {
     }
 
     public String getResult(){
-        // A
-        return "";
+        return this.attemptList.get(this.attemptList.size() - 1).getResult();
     }
 
     public void evaluateResult(Answers Ans){
@@ -62,12 +61,11 @@ public class MasterMind {
 
     private void changeGameStatus(Answers paraAttmpt){
         if (attemptList.size() < maxAllowTime){
-            // C
-            if (true) {
+            if (paraAttmpt.getResult().equals("****")) {
                 gameState=State.WIN;
-            } else {
-                gameState = State.LOST;
             }
+        } else {
+            gameState = State.LOST;
         }
     }
 
@@ -79,14 +77,13 @@ public class MasterMind {
         hidChar = hiddenNumber.toCharArray();
 
         for (int i=0;i < hiddenNumber.length();i++){
-            if (inChar[i]==hidChar[i]){
-                //mark the character is already used  inChar[i] = '#';
+            boolean isMatch = inChar[i] == hidChar[i];
+            if (isMatch){
                 rtnValue= rtnValue + this.allCorrect;
             } else {
                 for (int j=0;j < hiddenNumber.length();j++){
-                    // D
-                    if (true) {
-                        //mark the character is already used  inChar[i] = '#';
+                    boolean isContain = inChar[i] == hidChar[j];
+                    if (isContain) {
                         rtnValue=rtnValue + this.numberCorrect;
                         break;
                     }
