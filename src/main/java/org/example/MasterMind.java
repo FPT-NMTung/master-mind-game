@@ -47,12 +47,15 @@ public class MasterMind {
     }
 
     public String getResult(){
+        boolean isEmpty = this.attemptList.isEmpty();
+        if (isEmpty) {
+            return "";
+        }
         return this.attemptList.get(this.attemptList.size() - 1).getResult();
     }
 
     public void evaluateResult(Answers Ans){
-        // B
-        if (true) {
+        if (Ans.getAnswer().length() == 4) {
             Ans.setResult(matchResult(Ans.getAnswer()));
             this.attemptList.add(Ans);
         }
