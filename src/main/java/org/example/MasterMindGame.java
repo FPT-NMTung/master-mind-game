@@ -10,9 +10,7 @@ public class MasterMindGame {
         while (mGame.isProgress()){
             System.out.print("Enter Your Guess : ");
             String ansStr = acceptNumber();
-
             mGame.evaluateResult(new Answers(ansStr));
-
             System.out.print(mGame.getResult()+"\n");
         }
         if (mGame.isWon())  {

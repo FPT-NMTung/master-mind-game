@@ -1,29 +1,25 @@
 package org.example;
 
-import org.example.Answers;
-
 import java.util.*;
 public class MasterMind {
-    private static int defaultmaxAllowTime = 8;
-    private static int QUIZZ_LENGTH = 4;
-    private static char allCorrect='*';
-    private static char numberCorrect='!';
+    private static final int MAX_ALLOW_TIME = 8;
+    private static final int QUIZ_LENGTH = 4;
+    private static final char CORRECT_POSITION='*';
+    private static final char CORRECT_CONTAIN ='!';
     public enum State {PROGRESS, LOST, WIN };
     private String hiddenNumber;
     private State gameState;
-    private int maxAllowTime;
     private List<Answers> attemptList;
     private String correctAnswer = new String();
 
     public MasterMind() {
         gameState = State.PROGRESS;
         hiddenNumber = generateHiddenNumber();
-        maxAllowTime = defaultmaxAllowTime;
 
-        for(int i=1;i<= QUIZZ_LENGTH;i++){
-            correctAnswer = correctAnswer + allCorrect;
+        for(int i=1;i<= QUIZ_LENGTH;i++){
+            correctAnswer = correctAnswer + CORRECT_POSITION;
         }
-        attemptList = new ArrayList<Answers>();
+        attemptList = new ArrayList<>();
     }
 
     public String getHiddenNumber(){
@@ -63,7 +59,7 @@ public class MasterMind {
     }
 
     private void changeGameStatus(Answers paraAttmpt){
-        if (attemptList.size() < maxAllowTime){
+        if (attemptList.size() < MAX_ALLOW_TIME){
             if (paraAttmpt.getResult().equals("****")) {
                 gameState=State.WIN;
             }
@@ -72,7 +68,7 @@ public class MasterMind {
         }
     }
 
-    public String matchResult(String inputNumber){
+    private String matchResult(String inputNumber){
         char[] inChar;
         char[] hidChar;
         String rtnValue = new String();
@@ -82,12 +78,12 @@ public class MasterMind {
         for (int i=0;i < hiddenNumber.length();i++){
             boolean isMatch = inChar[i] == hidChar[i];
             if (isMatch){
-                rtnValue= rtnValue + this.allCorrect;
+                rtnValue= rtnValue + CORRECT_POSITION;
             } else {
                 for (int j=0;j < hiddenNumber.length();j++){
                     boolean isContain = inChar[i] == hidChar[j];
                     if (isContain) {
-                        rtnValue=rtnValue + this.numberCorrect;
+                        rtnValue=rtnValue + CORRECT_CONTAIN;
                         break;
                     }
                 }
